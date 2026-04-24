@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transmission du Lynx</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body {
+    margin:0;
+    font-family: "Courier New", monospace;
+    background: black;
+    color: #00ff9c;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 30px;
+    border: 2px solid #00ff9c;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+}
+
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+input {
+    padding: 12px;
+    font-size: 20px;
+    width: 200px;
+    text-align: center;
+    margin-top: 20px;
+    background: black;
+    color: #00ff9c;
+    border: 1px solid #00ff9c;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    background: #00ff9c;
+    border: none;
+}
+
+#message {
+    margin-top: 30px;
+    font-size: 18px;
+    min-height: 100px;
+}
+
+.glitch {
+    animation: glitch 0.2s infinite;
+}
+
+@keyframes glitch {
+    0% {opacity:1;}
+    50% {opacity:0.3;}
+    100% {opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Transmission du Lynx</h1>
+    <p>Entrez le code sécurisé :</p>
+
+    <input id="code" placeholder="XXXXXX">
+    <br>
+    <button onclick="verifier()">Valider</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+function verifier() {
+    let code = document.getElementById("code").value;
+
+    if(code === "788497") {
+
+        // effet glitch court
+        let msg = document.getElementById("message");
+        msg.classList.add("glitch");
+        msg.innerHTML = "Transmission en cours...";
+
+        setTimeout(() => {
+            msg.classList.remove("glitch");
+
+            // confetti
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            msg.innerHTML =
+            "<b>✔ Code validé</b><br><br>" +
+            "Bravo, vous êtes sur la bonne piste.<br><br>" +
+            "Dirigez-vous vers le hangar.<br>" +
+            "Votre chef de groupe vous attend pour la suite de la mission.<br><br>" +
+            "<i>Fin de transmission.</i>";
+
+        }, 1200);
+
+    } else {
+        document.getElementById("message").innerHTML =
+        "⛔ Code incorrect. Recherchez les indices.";
+    }
+}
+</script>
+
+</body>
+</html>
