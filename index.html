@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 80px auto;
     padding: 30px;
     border: 2px solid #00ff9c;
@@ -27,43 +27,29 @@ body {
 
 h1 {
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
-input {
+button {
+    display:block;
+    width: 100%;
+    margin: 10px 0;
     padding: 12px;
-    font-size: 20px;
-    width: 200px;
-    text-align: center;
-    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
     background: black;
     color: #00ff9c;
     border: 1px solid #00ff9c;
 }
 
-button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 18px;
-    cursor: pointer;
+button:hover {
     background: #00ff9c;
-    border: none;
+    color: black;
 }
 
 #message {
-    margin-top: 30px;
+    margin-top: 25px;
     font-size: 18px;
     min-height: 100px;
-}
-
-.glitch {
-    animation: glitch 0.2s infinite;
-}
-
-@keyframes glitch {
-    0% {opacity:1;}
-    50% {opacity:0.3;}
-    100% {opacity:1;}
 }
 </style>
 </head>
@@ -72,48 +58,45 @@ button {
 
 <div class="container">
     <h1>Transmission du Lynx</h1>
-    <p>Entrez le code sécurisé :</p>
 
-    <input id="code" placeholder="XXXX">
-    <br>
-    <button onclick="verifier()">Valider</button>
+    <p><b>En 1940, qui est le président de la République française ?</b></p>
+
+    <button onclick="verifier('A')">A. Charles de Gaulle</button>
+    <button onclick="verifier('B')">B. Philippe Pétain</button>
+    <button onclick="verifier('C')">C. Albert Lebrun</button>
+    <button onclick="verifier('D')">D. Georges Clemenceau</button>
+    <button onclick="verifier('E')">E. Paul Reynaud</button>
+    <button onclick="verifier('F')">F. Léon Blum</button>
 
     <div id="message"></div>
 </div>
 
 <script>
-function verifier() {
-    let code = document.getElementById("code").value;
 
-    if(code === "1940") {
+function verifier(reponse) {
 
-        let msg = document.getElementById("message");
-        msg.classList.add("glitch");
-        msg.innerHTML = "Transmission en cours...";
+    if(reponse === "C") {
 
-        setTimeout(() => {
-            msg.classList.remove("glitch");
+        confetti({
+            particleCount: 120,
+            spread: 80
+        });
 
-            confetti({
-                particleCount: 120,
-                spread: 80,
-                origin: { y: 0.6 }
-            });
-
-            msg.innerHTML =
-            "<b>✔ Code validé</b><br><br>" +
-            "Bravo, vous êtes sur la bonne piste.<br><br>" +
-            "Rendez-vous sous le hangar.<br>" +
-            "Votre chef de groupe vous attend pour la suite de la mission.<br><br>" +
-            "<i>Fin de transmission.</i>";
-
-        }, 1200);
+        document.getElementById("message").innerHTML =
+        "<b>✔ Réponse correcte</b><br><br>" +
+        "Bravo, vous êtes sur la bonne piste.<br><br>" +
+        "Rendez-vous sous le hangar.<br>" +
+        "Votre chef de groupe vous attend pour la suite de la mission.<br><br>" +
+        "<i>Fin de transmission.</i>";
 
     } else {
+
         document.getElementById("message").innerHTML =
-        "⛔ Code incorrect. Recherchez les indices.";
+        "⛔ Mauvaise réponse. Réfléchissez et recommencez.";
+
     }
 }
+
 </script>
 
 </body>
