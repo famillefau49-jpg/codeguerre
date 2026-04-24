@@ -74,7 +74,7 @@ button {
     <h1>Transmission du Lynx</h1>
     <p>Entrez le code sécurisé :</p>
 
-    <input id="code" placeholder="XXXXXX">
+    <input id="code" placeholder="XXXX">
     <br>
     <button onclick="verifier()">Valider</button>
 
@@ -85,9 +85,8 @@ button {
 function verifier() {
     let code = document.getElementById("code").value;
 
-    if(code === "788497") {
+    if(code === "1940") {
 
-        // effet glitch court
         let msg = document.getElementById("message");
         msg.classList.add("glitch");
         msg.innerHTML = "Transmission en cours...";
@@ -95,7 +94,6 @@ function verifier() {
         setTimeout(() => {
             msg.classList.remove("glitch");
 
-            // confetti
             confetti({
                 particleCount: 120,
                 spread: 80,
@@ -105,7 +103,7 @@ function verifier() {
             msg.innerHTML =
             "<b>✔ Code validé</b><br><br>" +
             "Bravo, vous êtes sur la bonne piste.<br><br>" +
-            "Dirigez-vous vers le hangar.<br>" +
+            "Rendez-vous sous le hangar.<br>" +
             "Votre chef de groupe vous attend pour la suite de la mission.<br><br>" +
             "<i>Fin de transmission.</i>";
 
